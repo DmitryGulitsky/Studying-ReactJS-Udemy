@@ -1,9 +1,9 @@
 import React from 'react';    // подключаем библитеку react
 import ReactDOM from 'react-dom';    // подключаем библитеку react-dom
 
-import AppHeader from './components/appHeader'
-import TodoList from './components/toDoList'
-import SearchPanel from './components/searchPanel'
+import AppHeader from './components/app-header'
+import TodoList from './components/todo-list'
+import SearchPanel from './components/search-panel'
 
 
 const App = () => {
