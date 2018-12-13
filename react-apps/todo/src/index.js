@@ -1,26 +1,13 @@
 import React from 'react';    // подключаем библитеку react
 import ReactDOM from 'react-dom';    // подключаем библитеку react-dom
 
-const TodoList = () => {
-  return (
-    <ul>
-      <li>Learn React</li>
-      <li>Build Awesome App</li>
-    </ul>
-  )
-};
+import AppHeader from './components/appHeader'
+import TodoList from './components/toDoList'
+import SearchPanel from './components/searchPanel'
 
-const AppHeader = () => {
-  return (
-    <h1>My Todo list</h1>
-  )
-};
-
-const SearchPanel = () => {
-  return <input type="text" placeholder="search" />
-};
 
 const App = () => {
+
   return (
     <div>
       <AppHeader />
