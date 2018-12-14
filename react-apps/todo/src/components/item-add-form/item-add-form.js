@@ -4,15 +4,37 @@ import './item-add-form.css';
 
 export default class ItemAddForm extends Component {
 
-  render() {
+  state = {
+    label: ''
+  }
+
+  onLabelChange = (e) => {    // передаем event
+    this.setState({
+      label: e.target.value     // извлекаем текущее значение поля
+    });
+  };
+
+  onSubmit = (e) => {
+    e.preventDefault();   // этот метод говорит, что при событии event метод по умолчанию выполнять не нужно. Чтобы при отправке формы не перезагружалась страница
+    this.props.onItemAdded(this.state.label);   // передаем значение из поля ввода
+  };
+
+  render() {  // onSubmit - событие отправки формы. Отлавливаем момент, когда пользователь отправляет форму (кликает мышью или жмет enter)
     return (
-      <div className="item-add-form">
+      <form className="item-add-form d-flex"
+            onSubmit={this.onSubmit}>
+        <input
+          type="text"
+          className="form-control"
+          onChange={this.onLabelChange}   // onChange() - событие для получения текущего значения инпута используем событие onChange и вызываем функцию
+          placeholder="What needs to be done"
+        />
         <button
           className="btn btn-outline-secondary"
-          onClick={() => this.props.onItemAdded('Hello')}>
+          >
           Add Item
         </button>
-      </div>
+      </form>
     )
   }
 }
