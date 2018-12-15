@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Spinner from '../spinner';
+import ErrorIndicator from '../error-indicator';
 import SwapiService from '../../services/swapi-service';
 
 import './random-planet.css';
@@ -11,7 +12,8 @@ export default class RandomPlanet extends Component {
 
   state = {
     planet: {},
-    loading: true   //  для спиннера
+    loading: true,   //  для спиннера
+    error: false
   };
 
   constructor() {
@@ -26,6 +28,12 @@ export default class RandomPlanet extends Component {
     });
   };
 
+  onError = (err) => {
+    this.setState({
+      error: true,
+      loading: false    // так как выскочила ошибка, убираем спиннер
+    });
+  };
 
   updatePlanet() {
 
@@ -33,19 +41,22 @@ export default class RandomPlanet extends Component {
 
     this.swapiService
       .getPlanet(id)
-      .then(this.onPlanetLoaded);
+      .then(this.onPlanetLoaded)
+      .catch(this.onError);
   }
 
   render() {
+    const { planet, loading, error} = this.state;
 
-    const { planet, loading } = this.state;
+    const hasData = !(loading || error);    // присвоить true, если нету ни загрузки, ни ошибки
 
+    const errorMessage = error ? <ErrorIndicator /> : null;
     const spinner = loading ? <Spinner /> : null;   // если загружаемся, то отображаем спиннер, если нет, то реакт игнорирует null
-
-    const content = !loading ? <PlanetView planet={planet}/> : null;
+    const content = hasData ? <PlanetView planet={planet}/> : null;
 
     return (
       <div className="random-planet jumbotron rounded">
+        {errorMessage}
         {spinner}
         {content}
       </div>
