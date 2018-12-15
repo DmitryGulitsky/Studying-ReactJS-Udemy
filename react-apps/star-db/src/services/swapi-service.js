@@ -43,8 +43,8 @@ export default class SwapiService {
   }
 
   _extractId(item) {
-    const idRegExp = /\/([0-9]*)\/$/;
-    return item.url.match(idRegExp)[1];
+    const idRegExp = /\/([0-9]*)\/$/;   // регулярное выражение для нахождения числа из url изображения, так как не имеем id
+    return item.url.match(idRegExp)[1];   //  перем первую группу. в круглых скобках. нулевая была бы со слэшами
   }
 
   _transformPlanet(planet) {
