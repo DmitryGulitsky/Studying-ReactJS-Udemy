@@ -18,7 +18,8 @@ export default class App extends Component {
       this.createTodoItem('Make Awesome App'),
       this.createTodoItem('Have a launch'),
     ],
-    term: ''
+    term: '',
+    filter: 'all'   // параметр, который будет обновляться в результате события на кнопках фильтра
   };
 
   createTodoItem(label) {
@@ -111,10 +112,29 @@ export default class App extends Component {
     });
   }
 
+  onFilterChange = (filter) => {
+    this.setState({ filter })
+  };
+
+  filter(items, filter) {   // фильтруем список дел. принимает массив элементов и текущий фильтр
+
+    switch(filter) {
+      case 'all':
+        return items;
+      case 'active':
+        return items.filter((item) => !item.done);
+      case 'done':
+        return items.filter((item) => item.done);
+      default:
+        return items;
+    }
+  }
+
   render() {
 
-    const { todoData, term } = this.state;
-    const visibleItems = this.search(todoData, term);
+    const { todoData, term, filter } = this.state;
+    const visibleItems = this.filter(
+      this.search(todoData, term), filter);
 
     const doneCount = this.state.todoData
       .filter((el) => el.done).length;
@@ -126,7 +146,10 @@ export default class App extends Component {
         <div className="top-panel d-flex">
           <SearchPanel
             onSearchChange={this.onSearchChange}/>
-          <ItemStatusFilter/>
+          <ItemStatusFilter
+            filter={filter}
+            onFilterChange={this.onFilterChange}    // event-listener который обновляет состояние компонента
+          />
         </div>
 
         <TodoList
