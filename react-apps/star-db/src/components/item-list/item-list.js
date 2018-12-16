@@ -18,8 +18,8 @@ export default class ItemList extends Component {
       .then((peopleList) => {
         this.setState({
           peopleList
-        })
-      })
+        });
+      });
   }
 
   renderItems(arr) {
@@ -27,20 +27,19 @@ export default class ItemList extends Component {
       return (
         <li className="list-group-item"
             key={id}
-            onClick={() => this.propsOnItemSelected(id)}>
+            onClick={() => this.props.onItemSelected(id)}>
           {name}
         </li>
-      )
-    })
+      );
+    });
   }
-
 
   render() {
 
     const { peopleList } = this.state;
 
     if (!peopleList) {
-      return <Spinner />
+      return <Spinner />;
     }
 
     const items = this.renderItems(peopleList);
