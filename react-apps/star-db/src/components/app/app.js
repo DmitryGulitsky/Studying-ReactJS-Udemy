@@ -9,6 +9,15 @@ import SwapiService from "../../services/swapi-service";
 
 import './app.css';
 
+import {
+  PersonDetails,
+  PlanetDetails,
+  StarshipDetails,
+  PersonList,
+  PlanetList,
+  StarshipList
+} from "../sw-components/";
+
 
 export default class App extends Component {
 
@@ -68,9 +77,19 @@ export default class App extends Component {
       <ErrorBoundry>
         <div className="stardb-app">
           <Header />
-          <Row
-            left={personDetails}
-            right={starshipDetails} />
+
+          <PersonDetails itemId={11}/>
+
+          <PlanetDetails itemId={5}/>
+
+          <StarshipDetails itemId={9}/>
+
+          <PersonList />
+
+          <PlanetList />
+
+          <StarshipList />
+
         </div>
       </ErrorBoundry>
     );
