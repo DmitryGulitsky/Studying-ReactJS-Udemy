@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import ErrorButton from '../error-button/error-button';
-import SwapiService from '../../services/swapi-service';
 
 import './item-details.css';
 
@@ -9,18 +8,16 @@ const Record = ({ item, field, label }) => {
   return (
     <li className="list-group-item">
       <span className="term">{label}</span>
-      <span>{ item[field]}</span>
+      <span>{ item[field] }</span>
     </li>
-  )
+  );
 };
 
 export {
   Record
-}
+};
 
 export default class ItemDetails extends Component {
-
-  swapiService = new SwapiService();
 
   state = {
     item: null,
@@ -59,14 +56,13 @@ export default class ItemDetails extends Component {
       return <span>Select a item from a list</span>;
     }
 
-    const { id, name, gender,
-              birthYear, eyeColor } = item;
+    const { name } = item;
 
     return (
       <div className="item-details card">
         <img className="item-image"
           src={image}
-          alt="character"/>
+          alt="item"/>
 
         <div className="card-body">
           <h4>{name}</h4>
@@ -80,6 +76,6 @@ export default class ItemDetails extends Component {
           <ErrorButton />
         </div>
       </div>
-    )
+    );
   }
 }
