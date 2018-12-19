@@ -1,3 +1,5 @@
+// здесь показано разделение логики и view для random-planet
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -21,7 +23,7 @@ export default class RandomPlanet extends Component {
 
   state = {
     planet: {},
-    loading: true
+    loading: true   //  значение по умолчанию, что данные о планете еще не загрузились
   };
 
   componentDidMount() {
@@ -37,7 +39,7 @@ export default class RandomPlanet extends Component {
   onPlanetLoaded = (planet) => {
     this.setState({
       planet,
-      loading: false,
+      loading: false,   // присваиваем false, чтобы убрать спиннер
       error: false
     });
   };
@@ -49,18 +51,20 @@ export default class RandomPlanet extends Component {
     });
   };
 
-  updatePlanet = () => {
-    const id = Math.floor(Math.random()*17) + 2;
+  updatePlanet = () => {    // получаем данные с сервера
+    const id = Math.floor(Math.random()*17) + 2;    // значение для url планеты
     this.swapiService
       .getPlanet(id)
-      .then(this.onPlanetLoaded)
-      .catch(this.onError);
+      .then(this.onPlanetLoaded)    // копируем полученные данные во внутренний state компонента. Это не обязательно, но может помочь избежать ошибок, если у компонента и API не одинаковый формат данных
+      .catch(this.onError);   // catch - инструкции, которые будут переданы, если получим ошибку
   };
 
   render() {
     const { planet, loading, error } = this.state;
 
     const hasData = !(loading || error);
+
+    // отображаем только одно из данные/спиннер/ошибка, так как React игнорирует null
 
     const errorMessage = error ? <ErrorIndicator/> : null;
     const spinner = loading ? <Spinner /> : null;
@@ -74,15 +78,18 @@ export default class RandomPlanet extends Component {
       </div>
     );
   }
-
 }
 
 const PlanetView = ({ planet }) => {
 
-  const { id, name, population,
-    rotationPeriod, diameter } = planet;
+  const {
+    id,
+    name,
+    population,
+    rotationPeriod,
+    diameter } = planet;
 
-  return (
+  return (    // React.Fragment позволяет обернуть несколько реакт элементов в один, чтобы не создавать новые DOM элементы
     <React.Fragment>
       <img className="planet-image"
            src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}

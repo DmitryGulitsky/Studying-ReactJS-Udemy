@@ -23,8 +23,8 @@ import {StarshipDetails} from "../sw-components/details";
 export default class App extends Component {
 
   state = {
-    swapiService: new SwapiService(),
-    isLoggedIn: false
+    swapiService: new SwapiService(), //  создаем объект с методами вызова данных с сервера
+    isLoggedIn: false   // задаем значение, что пользователь не авторизован
   };
 
   onLogin = () => {
