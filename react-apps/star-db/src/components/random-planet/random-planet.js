@@ -11,11 +11,11 @@ import './random-planet.css';
 
 export default class RandomPlanet extends Component {
 
-  static defaultProps = {
-    updateInterval: 10000
+  static defaultProps = {   // свойства по умолчанию
+    updateInterval: 5000
   };
 
-  static propTypes = {
+  static propTypes = {    // тип данных по умолчанию. установили через npm prop-types. isRequired - если обязательное значение
     updateInterval: PropTypes.number
   };
 
@@ -26,13 +26,13 @@ export default class RandomPlanet extends Component {
     loading: true   //  значение по умолчанию, что данные о планете еще не загрузились
   };
 
-  componentDidMount() {
+  componentDidMount() {   // метод вызывается сразу после метода render()
     const { updateInterval } = this.props;
     this.updatePlanet();
     this.interval = setInterval(this.updatePlanet, updateInterval);
   }
 
-  componentWillUnmount() {
+  componentWillUnmount() {    // метод вызывается сразу после того, как компонет исчезает с экрана
     clearInterval(this.interval);
   }
 

@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { PersonDetails, PersonList } from '../sw-components';
 import Row from '../row';
 
-const PeoplePage = ({ history, match }) => {
+const PeoplePage = ({ history, match }) => {    // history - история путей, match - параметры текущего пути
 
   const { id } = match.params;
 

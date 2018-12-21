@@ -1,3 +1,5 @@
+//    компонент-обертка который решает отрисовать что-то полученное или вернуть ошибку
+
 import React, { Component } from 'react';
 
 import ErrorIndicator from '../error-indicator/error-indicator';
@@ -5,10 +7,10 @@ import ErrorIndicator from '../error-indicator/error-indicator';
 export default class ErrorBoundry extends Component {
 
   state = {
-    hasError: false
+    hasError: false   //  нету ошибки по умолчанию
   };
 
-  componentDidCatch() {
+  componentDidCatch() {   //    поменять значение state при ошибке
     this.setState({
       hasError: true
     });
@@ -16,10 +18,10 @@ export default class ErrorBoundry extends Component {
 
   render() {
 
-    if (this.state.hasError) {
+    if (this.state.hasError) {    //  возвратить заготовленный компонент с ошибкой
       return <ErrorIndicator />
     }
 
-    return this.props.children;
+    return this.props.children;   //    ожидаем получить один или несколько компонентов и вернуть их в том же виде, в котором и получили
   }
 }

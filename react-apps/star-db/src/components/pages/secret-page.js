@@ -10,7 +10,7 @@ const SecretPage = ({ isLoggedIn }) => {
       </div>
     );
   }
-  return <Redirect to="/login" />;
+  return <Redirect to="/login" />;    // перенос на адрес /login
 };
 
 export default SecretPage;

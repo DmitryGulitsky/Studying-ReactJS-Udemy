@@ -1,3 +1,5 @@
+// компонент, который бозвращает блок из друх элементов
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -17,7 +19,7 @@ const Row = ({ left, right }) => {
 };
 
 Row.propTypes = {
-  left: PropTypes.node,
+  left: PropTypes.node,   // PropTypes.node - что-то что можно отрендерить в JSX
   right: PropTypes.node
 };
 

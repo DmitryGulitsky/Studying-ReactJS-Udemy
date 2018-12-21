@@ -1,8 +1,11 @@
+// логика работы с сетью
+
 import React, { Component } from 'react';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
 
-const withData = (View) => {
+const withData = (View) => {    // функция, для того чтобы можно было выбирать тип данных
+                                // оборачивает основной компонент. Выибирает отображать spinner, ошибку или компонент
   return class extends Component {
 
     state = {

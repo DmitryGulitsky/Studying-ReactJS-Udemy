@@ -12,7 +12,7 @@ const renderModelAndName = ({ model, name}) => <span>{name} ({model})</span>;
 
 const mapPersonMethodsToProps = (swapiService) => {
   return {
-    getData: swapiService.getAllPeople
+    getData: swapiService.getAllPeople        // создаем новый метод, куда пойдет getAllPeople из swapiService
   };
 };
 
@@ -28,7 +28,7 @@ const mapStarshipMethodsToProps = (swapiService) => {
   };
 };
 
-const PersonList = compose(
+const PersonList = compose(     // ItemList оборачивается в каждую функцию по порфдку снизу вверх
                      withSwapiService(mapPersonMethodsToProps),
                      withData,
                      withChildFunction(renderName)

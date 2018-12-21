@@ -29,12 +29,12 @@ const ItemList = (props) => {
   );
 };
 
-ItemList.defaultProps = {
+ItemList.defaultProps = {   //  значение по умолчанию - пустая функция
   onItemSelected: () => {}
 };
 
-ItemList.propTypes = {
-  onItemSelected: PropTypes.func,
+ItemList.propTypes = {    //  проверка библиотекой prop-types
+  onItemSelected: PropTypes.func,   //
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   children: PropTypes.func.isRequired
 };

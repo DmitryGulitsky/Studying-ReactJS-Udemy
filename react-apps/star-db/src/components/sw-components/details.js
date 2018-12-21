@@ -2,7 +2,7 @@ import React from 'react';
 
 import ItemDetails, { Record } from '../item-details';
 
-import { SwapiServiceConsumer } from '../swapi-service-context';
+import { SwapiServiceConsumer } from '../swapi-service-context';    // передаем контекст
 
 const PersonDetails = ({ itemId }) => {
   return (

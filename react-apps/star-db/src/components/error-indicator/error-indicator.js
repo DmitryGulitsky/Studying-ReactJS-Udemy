@@ -1,3 +1,5 @@
+//    рендерим вид ошибки в компоненте или все приложении
+
 import React from 'react';
 
 import './error-indicator.css';

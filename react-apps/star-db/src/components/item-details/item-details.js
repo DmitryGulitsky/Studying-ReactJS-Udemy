@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 
-import ErrorButton from '../error-button/error-button';
-
 import './item-details.css';
 
 const Record = ({ item, field, label }) => {
-  return (
+  return (    // выведем имя свойства и конкретное значение для элемента item
     <li className="list-group-item">
       <span className="term">{label}</span>
       <span>{ item[field] }</span>
@@ -28,7 +26,8 @@ export default class ItemDetails extends Component {
     this.updateItem();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps) {   // передаем предыдущее свойство для проверки выполнения условий
+                                    //  ВАЖНО! проверка условия, чтобы не запустить бесконечный цикл запуска этого метода при изменении state
     if (this.props.itemId !== prevProps.itemId ||
       this.props.getData !== prevProps.getData ||
       this.props.getImageUrl !== prevProps.getImageUrl) {
@@ -38,7 +37,7 @@ export default class ItemDetails extends Component {
 
   updateItem() {
     const { itemId, getData, getImageUrl } = this.props;
-    if (!itemId) {
+    if (!itemId) {    // проверяем выбран ли пункт
       return;
     }
 
@@ -70,12 +69,11 @@ export default class ItemDetails extends Component {
           <h4>{name}</h4>
           <ul className="list-group list-group-flush">
             {
-              React.Children.map(this.props.children, (child) => {
-                return React.cloneElement(child, { item });
+              React.Children.map(this.props.children, (child) => {    // используем для всех дочерних элементов, так как они не обязательно могут быть react компонентами
+                return React.cloneElement(child, { item });   //    копируем к свойствам field, label добавим item
               })
             }
           </ul>
-          <ErrorButton />
         </div>
       </div>
     );
